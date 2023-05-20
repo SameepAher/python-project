@@ -18,9 +18,9 @@
       <form method="post" action="{{ url_for(target) }}">
         <!-- ************  CODING ZONE  ************ -->
         <div id="code">
-          <div id="title-code" class="head-section">
+          <div id="title-code" class="head-section" style="width:100%">
             Source Code
-            <input id="launch-button" type="submit" value="Launch" onclick="{}"/>
+            <input class="run-button" type="submit" value="Run" onclick="{}"/>
           </div>
           {% block code %} {% endblock %}
                 <script
@@ -52,21 +52,18 @@
 
         <!-- ************ COMPILATION RESULTS ZONE ************ -->
 
-        <div id="compile">
-          <div id="title-compile" class="head-section">
-            Compilation / Output
-          </div>
-          {% block comp %} {% endblock %}
-        </div>
+
         <div id="testcase-status">
           <div class="section-container">
             <div class="section">
               <div id="title-testcase" class="head-section">Input</div>
               {% block testcase %} {% endblock %}
             </div>
-            <div class="section">
-              <div id="title-testcase" class="head-section">status</div>
-              {% block status %} {% endblock %}
+            <div id="compile" class="section">
+              <div id="title-compile" class="head-section">
+                Compilation / Output
+              </div>
+              {% block comp %} {% endblock %}
             </div>
           </div>
         </div>
