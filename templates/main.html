@@ -1,9 +1,22 @@
 {% extends "base.html" %}
 {% block code %}
-<textarea id="text-code" name="code" rows={{ rows }} cols={{ cols }}>
-{{ code }}
-</textarea>
-<div id="text-code-ace" class="hidden">{{ code }}</div>
+<textarea id="text-code" name="code" style="display: none" rows=15 cols=20>
+    {{ code }}
+    </textarea>
+<div
+          contenteditable="true"
+          id="editor"
+          style="
+            opacity: 1;
+            font-size: 20px;
+            height: 400px;
+            width: 700px;
+            top: 0px;
+            left: 0px;
+            position: relative;
+          "
+        >{{ code }}</div>
+
 {% endblock %}
 
 {% block run %}
