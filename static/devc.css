@@ -1,6 +1,10 @@
-body {
-    background: #E5E4DF;
-    color: #000305;
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: #121212;
+    color: #E5E4DF;
     font-size: 14px;
     font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     line-height: 1.429;
@@ -8,62 +12,114 @@ body {
     padding: 0;
     text-align: left;
     height: 100vh;
+  }
+  .run-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .run-button:hover {
+    background-color: #45a049;
+  }
+  
+  .run-button:focus {
+    outline: none;
+  }
+  
+  .run-button:active {
+    background-color: #3e8e41;
+  }
+  
+  
+  textarea {
+  padding-left: 5px;
+  background: #1a1a1a;
+  color: #e5e5e5;
+  border-radius: 4px;
+  border-color: #c4c4c4;
 }
 
-.hidden {
+textarea:focus {
+  outline: none;
+}
+
+  .hidden {
     display: none;
-}
-
-#content {
+  }
+  
+  #content {
     width: 100vw;
     height: 100vh;
-}
-
-#content form {
+    padding: 40px;
+  }
+  
+  #content form {
     display: grid;
-    grid-template-rows: 50% 50%;
-    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 20px;
     height: 100%;
-}
-
-#content > form > div {
+  }
+  
+  #content > form > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-}
-
-.head-section {
+  }
+  
+  .head-section {
     width: 91%;
     text-align: left;
     margin: 8px 0;
-}
+    align-items: center;
+    background-color: #333333;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: #FFFFFF;
+  }
+  
 
-#content form div textarea {
-    height: 80%;
+  
+  #content form div textarea {
+    height: 100%;
     width: 91%;
     margin: 0;
     padding: 0;
     resize: none;
-}
-
-.section-container {
+  }
+  
+  .section-container {
     width: 95%;
     height: 100%;
     display: flex;
-}
-
-.section {
+  }
+  
+  .section {
     width: 100%;
     display: flex;
     height: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-#title-code {
+  }
+  
+  #title-code {
     display: flex;
     justify-content: space-between;
-}
+  }
+  
+  #code {
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+  
