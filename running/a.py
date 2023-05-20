@@ -1,1 +1,1 @@
-cout << "Hi";
+print("hello world")
