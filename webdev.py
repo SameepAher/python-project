@@ -35,7 +35,7 @@ def runpy():
         text2 = text.split("\n")
 
         for line in text2:
-            if line.startswith("/openai"):
+            if line.startswith("/getcode"):
                 line2 = line.split(" ")
                 global prompt
                 prompt = " ".join(line2)
