@@ -2,7 +2,11 @@ from flask import Flask, render_template, request
 from runcode import runcode
 import os
 import requests
+import openai
+import re
+
 app = Flask(__name__)
+openai.api_key = os.getenv("API_KEY")
 
 
 
@@ -14,35 +18,70 @@ if __name__ == "__main__":
 
 default_rows = "15"
 default_cols = "20"
+output = ''
+prompt = ''
+code = ''
+resrun = ''
+rescompil = ''
 
 testcases = list()
 @app.route("/")
 @app.route("/py")
 @app.route("/runpy", methods=['POST', 'GET'])
+
 def runpy():
     if request.method == 'POST':
-        code = request.form['code']
-        testcase = request.form['testcase']
-        data, temp = os.pipe()
+        if request.form.get('openai') == 'Get Code':
+            text = request.form.get('code')
 
-        os.write(temp, bytes(testcase, "utf-8"))
-        os.close(temp)
-        run = runcode.RunPyCode(code, data)
-        rescompil, resrun = run.run_py_code()
-        print(resrun, rescompil)
-        if not resrun:
-            resrun = 'No result!'
+            text2 = text.split("\n")
+
+            for line in text2:
+                if line.startswith("/openai"):
+                    line2 = line.split(" ")
+                    global prompt
+                    prompt = " ".join(line2)
+
+            response = openai.Completion.create(
+                model="text-davinci-003",
+                prompt=prompt,
+                max_tokens=1000,
+                temperature=0.6,
+            )
+            global output
+            output = response.choices[0].text
+
+        elif  request.form.get('coderun') == 'Run':
+            output = ''
+            global code
+            code = request.form['code']
+            print(code)
+            testcase = request.form['testcase']
+            data, temp = os.pipe()
+
+            os.write(temp, bytes(testcase, "utf-8"))
+            os.close(temp)
+            run = runcode.RunPyCode(code, data)
+            global resrun
+            global rescompil
+            rescompil, resrun = run.run_py_code()
+            if not resrun:
+                resrun = 'No result!'
+        else:
+            pass
+
     else:
         code = default_py_code
         resrun = 'No result!'
         rescompil = "No compilation for Python"
 
     return render_template("main.html",
-                           code=code,
+                           code=code + "\n" + output,
                            target="runpy",
                            resrun=resrun,
                            rescomp=rescompil,  # "No compilation for Python",
-                           rows=default_rows, cols=default_cols)
+                           rows=default_rows, cols=default_cols,
+                           )
 
 
 if __name__ == "__main__":

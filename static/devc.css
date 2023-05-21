@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+
 * {
     box-sizing: border-box;
   }
@@ -13,7 +15,22 @@
     text-align: left;
     height: 100vh;
   }
-  .run-button {
+
+  .instruction {
+    font-family: 'Arvo', serif;
+    font-size: 17px;
+    width: 100vw;
+    padding: 23px 0 0 40px;
+  }
+
+  .mkdown {
+    padding: 4px 6px;
+    background: rgb(80, 79, 79);
+    border-radius: 5px;
+  }
+  
+  .convert-button, .run-button {
+    margin-left: 10px;
     display: inline-block;
     padding: 8px 16px;
     background-color: #4CAF50;
@@ -26,15 +43,15 @@
     text-decoration: none;
   }
   
-  .run-button:hover {
+  .convert-button:hover, .run-button:hover {
     background-color: #45a049;
   }
   
-  .run-button:focus {
+  .convert-button:focus, .run-button:focus {
     outline: none;
   }
   
-  .run-button:active {
+  .convert-button:active, .run-button:active {
     background-color: #3e8e41;
   }
   
@@ -57,8 +74,8 @@ textarea:focus {
   
   #content {
     width: 100vw;
-    height: 100vh;
-    padding: 40px;
+    height: 95vh;
+    padding: 15px 40px 40px 40px;
   }
   
   #content form {

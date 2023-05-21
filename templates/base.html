@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>sedlyf</title>
+<html >
+<head>
+    <title>CodeBhay IDE</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="/static/devc.css" />
     <link
@@ -14,13 +14,19 @@
 ></script>
   </head>
   <body id="index" class="home">
+    <div class="instruction">
+      To get generic code from AI, type <span class="mkdown">/openai code you want</span> in the editor and press the Get Code button.
+    </div>
     <div id="content">
       <form method="post" action="{{ url_for(target) }}">
         <!-- ************  CODING ZONE  ************ -->
         <div id="code">
           <div id="title-code" class="head-section" style="width:100%">
             Source Code
-            <input class="run-button" type="submit" value="Run" onclick="{}"/>
+            <div class="btns">
+              <input class="convert-button" type="submit" value="Get Code" name="openai" onclick="{}"/>
+              <input class="run-button" type="submit" value="Run" name="coderun" onclick="{}"/>
+            </div>
           </div>
           {% block code %} {% endblock %}
                 <script
