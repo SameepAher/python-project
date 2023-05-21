@@ -3,12 +3,9 @@ from runcode import runcode
 import os
 import requests
 import openai
-import re
 
 app = Flask(__name__)
 openai.api_key = os.getenv("API_KEY")
-
-
 
 default_py_code = """
 
@@ -31,6 +28,8 @@ testcases = list()
 
 def runpy():
     if request.method == 'POST':
+        global code
+        code = ''
         text = request.form.get('code')
 
         text2 = text.split("\n")
@@ -53,7 +52,6 @@ def runpy():
 
         elif  request.form.get('coderun') == 'Run':
             output = ''
-            global code
             code = request.form['code']
             testcase = request.form['testcase']
             data, temp = os.pipe()
