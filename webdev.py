@@ -31,31 +31,30 @@ testcases = list()
 
 def runpy():
     if request.method == 'POST':
-        if request.form.get('openai') == 'Get Code':
-            text = request.form.get('code')
+        text = request.form.get('code')
 
-            text2 = text.split("\n")
+        text2 = text.split("\n")
 
-            for line in text2:
-                if line.startswith("/openai"):
-                    line2 = line.split(" ")
-                    global prompt
-                    prompt = " ".join(line2)
+        for line in text2:
+            if line.startswith("/openai"):
+                line2 = line.split(" ")
+                global prompt
+                prompt = " ".join(line2)
 
+        if request.form.get('openai') == 'Get Code' and prompt:
             response = openai.Completion.create(
                 model="text-davinci-003",
                 prompt=prompt,
-                max_tokens=1000,
+                max_tokens=1500,
                 temperature=0.6,
             )
             global output
-            output = response.choices[0].text
+            output = "\n" + response.choices[0].text
 
         elif  request.form.get('coderun') == 'Run':
             output = ''
             global code
             code = request.form['code']
-            print(code)
             testcase = request.form['testcase']
             data, temp = os.pipe()
 
@@ -76,7 +75,7 @@ def runpy():
         rescompil = "No compilation for Python"
 
     return render_template("main.html",
-                           code=code + "\n" + output,
+                           code=code + output,
                            target="runpy",
                            resrun=resrun,
                            rescomp=rescompil,  # "No compilation for Python",
